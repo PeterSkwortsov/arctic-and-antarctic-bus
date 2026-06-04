@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>Arctic Bus | Кванториум | Вездеход для Арктики и Антарктики</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <title>Квантовый скачок | Арктический автобус | Кванториум Нижний Новгород</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Swiper слайдер -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         * {
             margin: 0;
@@ -20,7 +24,6 @@
             overflow-x: hidden;
         }
 
-        /* Автомобильный / гоночный стиль — темный фон, акценты, резкие углы, карбоновая текстура */
         .carbon-bg {
             background: radial-gradient(circle at 20% 30%, #0B1219, #030609);
         }
@@ -37,7 +40,6 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Типография */
         h1 {
             font-size: 2.4rem;
             font-weight: 800;
@@ -67,12 +69,19 @@
         }
 
         @media (min-width: 768px) {
-            h1 { font-size: 3.6rem; }
-            h2 { font-size: 2.2rem; }
-            h3 { font-size: 1.5rem; }
+            h1 {
+                font-size: 3.6rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
         }
 
-        /* Карточки в агрессивном авто-стиле */
         .card {
             background: rgba(15, 25, 35, 0.85);
             backdrop-filter: blur(2px);
@@ -80,8 +89,9 @@
             border-radius: 1.2rem;
             padding: 1.6rem;
             transition: transform 0.2s ease, box-shadow 0.2s;
-            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.5);
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.5);
         }
+
         .card:hover {
             transform: translateY(-4px);
             border-color: #00A8E8;
@@ -101,8 +111,8 @@
             text-transform: uppercase;
         }
 
-        /* Сетки */
-        .grid-2, .grid-3 {
+        .grid-2,
+        .grid-3 {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1.8rem;
@@ -110,333 +120,585 @@
         }
 
         @media (min-width: 768px) {
-            .grid-2 { grid-template-columns: repeat(2, 1fr); }
-            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
-        /* Прелоадер / заглушка для изображений (автомобильный стиль с пульсацией) */
-        .image-placeholder {
-            background: #101C24;
+        /* Стили для реальных фото вместо прелоадеров */
+        .real-image {
+            width: 100%;
             border-radius: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 1rem;
-            border: 1px dashed #00A8E8;
-            transition: all 0.2s;
-            min-height: 200px;
+            object-fit: cover;
+            aspect-ratio: 16 / 10;
+            background: #0F1C24;
+            border: 1px solid #00A8E840;
+            transition: transform 0.2s;
         }
-        .loader-icon {
-            width: 48px;
-            height: 48px;
-            border: 3px solid #2C5368;
-            border-top: 3px solid #00A8E8;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1rem;
+
+        .real-image:hover {
+            transform: scale(1.02);
+            border-color: #00A8E8;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+        .img-wrapper {
+            background: #07121A;
+            border-radius: 1.2rem;
+            overflow: hidden;
         }
-        .placeholder-text {
-            color: #7F9EAF;
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+
         .caption {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #8AAEC2;
-            margin-top: 1rem;
+            margin-top: 0.8rem;
             text-align: center;
         }
 
-        /* Hero с динамической полосой (автоспорт) */
+        /* Слайдер Swiper */
+        .swiper {
+            width: 100%;
+            height: auto;
+            border-radius: 1.5rem;
+            margin: 1.5rem 0 2rem;
+            overflow: hidden;
+            border: 1px solid #00A8E880;
+            box-shadow: 0 20px 30px -10px black;
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+            max-height: 460px;
+            background: #0F1C24;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #00A8E8;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #00A8E8;
+        }
+
+        /* Таблица */
+        .compare-table {
+            background: #0F1C24;
+            border-radius: 1.5rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            border: 1px solid #2C5368;
+        }
+
+        .compare-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .compare-table th,
+        .compare-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #2C5368;
+            color: #E0EDF5;
+        }
+
+        .compare-table th {
+            background: #0A1820;
+            color: #00A8E8;
+            font-weight: 700;
+        }
+
+        .highlight-row {
+            background: #0F2938;
+            font-weight: 700;
+            border-left: 3px solid #00A8E8;
+        }
+
+        .price-big {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #FFB347;
+        }
+
+        .timeline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .timeline-step {
+            flex: 1;
+            min-width: 200px;
+            background: #0F1C24;
+            border-radius: 1.2rem;
+            padding: 1.5rem;
+            border-top: 4px solid #00A8E8;
+        }
+
         .hero {
             background: linear-gradient(115deg, #030B10 0%, #0C1D2A 100%);
-            padding: 3rem 0 3.5rem;
+            padding: 3rem 0 2rem;
             position: relative;
-            overflow: hidden;
         }
-        .hero::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #00A8E8, #FF4D4D, #00A8E8);
-        }
+
         .hero-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.8rem;
             margin: 1.5rem 0;
         }
+
         .hero-tag {
             background: rgba(0, 168, 232, 0.2);
-            border: 1px solid rgba(0,168,232,0.5);
+            border: 1px solid rgba(0, 168, 232, 0.5);
             padding: 0.4rem 1rem;
             border-radius: 60px;
             font-size: 0.8rem;
             font-weight: 600;
-            backdrop-filter: blur(4px);
         }
 
-        /* Спец-блок кастомизации */
-        .flex-compare {
+        .stats-row {
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        @media (min-width: 640px) {
-            .flex-compare { flex-direction: row; }
-        }
-        .custom-option {
-            background: #0F1C24;
-            border-radius: 1.2rem;
-            padding: 1.2rem;
-            flex: 1;
-            border-left: 4px solid #00A8E8;
-            transition: 0.2s;
-        }
-        .custom-option:hover {
-            background: #162D3A;
-        }
-
-        .highlight-block {
+            flex-wrap: wrap;
+            gap: 1.5rem;
             background: #0E1921;
-            border-radius: 1rem;
-            padding: 1.2rem;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
             margin: 1.5rem 0;
+        }
+
+        .stat-item {
+            flex: 1;
             text-align: center;
-            border: 1px solid #00A8E830;
         }
 
-        .btn-outline {
-            border: 2px solid #00A8E8;
-            background: transparent;
-            padding: 0.7rem 1.5rem;
-            border-radius: 40px;
-            font-weight: 700;
-            display: inline-block;
-            text-decoration: none;
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
             color: #00A8E8;
-            transition: 0.2s;
-        }
-        .btn-outline:hover {
-            background: #00A8E8;
-            color: #030B10;
         }
 
-        footer {
+        .footer {
             background: #03080E;
             padding: 2rem 0;
             text-align: center;
             border-top: 1px solid #1C3C4A;
-            color: #8AAEC2;
             font-size: 0.8rem;
+            color: #8AAEC2;
+        }
+
+        .btn-outline-light {
+            border: 2px solid #00A8E8;
+            background: transparent;
+            padding: 0.6rem 1.4rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #00A8E8;
+            display: inline-block;
+            transition: 0.2s;
+        }
+
+        .mini-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .mini-card {
+            flex: 1;
+            min-width: 130px;
+            background: #0F1C24;
+            border-radius: 1rem;
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid #2C5368;
+        }
+
+        .mini-card img {
+            width: 100%;
+            border-radius: 0.8rem;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
+
 <body class="carbon-bg">
 
-<!-- Hero: с акцентом на Кванториум и без 2026 -->
-<div class="hero">
-    <div class="container">
-        <h1>Автобус для Арктики<br>и Антарктики</h1>
-        <p style="font-size: 1.1rem; margin-top: 0.8rem; max-width: 680px; color: #CDE5F0;">
-            Вездеход на шинах низкого давления. <strong>Дизайн корпуса + инновационный протектор</strong> для экстремальных широт.
-        </p>
-        <div class="hero-tags">
-            <span class="hero-tag">🎨 Кастомизация под задачи</span>
-            <span class="hero-tag">🧊 −50°C до +30°C</span>
-            <span class="hero-tag">🌱 Низкое давление на грунт</span>
-            <span class="hero-tag">🔬 Научные / корпоративные миссии</span>
-        </div>
-        <div style="margin-top: 1rem; font-weight: 600; letter-spacing: 1px;">
-            ⚡ КОНЦЕПТ-ПРОЕКТ КВАНТОРИУМ НИЖНИЙ НОВГОРОД
-        </div>
-    </div>
-</div>
-
-<!-- Суть проекта + прототип -->
-<section>
-    <div class="container">
-        <h2>📌 Проект: прототип арктического вездехода</h2>
-        <div class="grid-2">
-            <div class="card">
-                <span class="badge">🎯 КЛЮЧЕВЫЕ АКЦЕНТЫ</span>
-                <ul style="list-style: none; padding-left:0;">
-                    <li>✨ <strong>Дизайн корпуса</strong> – аэродинамика, термоизоляция, визуальный код Арктики</li>
-                    <li>⚙️ <strong>Дизайн протектора колеса</strong> на шинах сверхнизкого давления</li>
-                    <li>🧩 <strong>Кастомизация</strong> под экспедиции, геологоразведку, МЧС, туризм</li>
-                </ul>
-            </div>
-            <div class="card">
-                <span class="badge">👥 ДЛЯ КОГО</span>
-                <p>Научно-исследовательские группы (полярные станции, РАН), корпоративные заказчики (нефтегаз, логистика), спасательные подразделения.</p>
-                <p style="margin-top: 0.8rem;">✔️ Индивидуальная компоновка салона, дополнительное оборудование, выбор цветовых решений.</p>
-            </div>
-        </div>
-        <div class="highlight-block">
-            <strong>💡 Философия проекта:</strong> не просто транспорт, а мобильная лаборатория / командный центр, адаптируемый под специфику каждого рейса в Арктике или Антарктике.
-        </div>
-    </div>
-</section>
-
-<!-- ДИЗАЙН КОРПУСА + прелоадер вместо изображения -->
-<section style="background: #07121A;">
-    <div class="container">
-        <h2>🚐 Дизайн корпуса</h2>
-        <div class="grid-2">
-            <div class="image-placeholder">
-                <div class="loader-icon"></div>
-                <div class="caption">Обтекаемые формы, ледяная эстетика, усиленная термозащита</div>
-            </div>
-            <div class="card">
-                <span class="badge">🧊 Особенности экстерьера</span>
-                <ul style="padding-left: 1.2rem;">
-                    <li>➜ Многослойный композит с утеплителем для экстремальных температур</li>
-                    <li>➜ LED-адаптивная оптика с обогревом (полярная ночь)</li>
-                    <li>➜ Аэродинамические обводы для снижения налипания снега</li>
-                    <li>➜ Выход на крышу, люки для эвакуации и научных наблюдений</li>
-                    <li>➜ Цветовая гамма: белый / оранжевый / камуфляж "арктический"</li>
-                </ul>
-                <p style="margin-top: 0.8rem;">🎨 <strong>Кастомизация:</strong> нанесение логотипов заказчика, экспедиционная маркировка, дополнительный багажный отсек.</p>
+    <div class="hero">
+        <div class="container">
+            <div class="badge" style="background: #FF4D4D; color:white;">❄️ КОНКУРС ПРОЕКТНЫХ ЗАДАЧ ГАЗ</div>
+            <h1>Автобус для Арктики и Антарктики<br>
+            </h1>
+            <div class="hero-tags">
+                <span class="hero-tag">⚡ Кванториум Нижний Новгород</span>
+                <span class="hero-tag">🧊 −50°C работа</span>
+                <span class="hero-tag">🚀 400 л.с. / 8х8</span>
+                <span class="hero-tag">🌱 давление < 0.3 кг/см²</span>
             </div>
         </div>
     </div>
-</section>
 
-<!-- ДИЗАЙН ПРОТЕКТОРА КОЛЕСА + прелоадер -->
-<section>
-    <div class="container">
-        <h2>🛞 Дизайн протектора колеса</h2>
-        <div class="grid-2">
-            <div class="image-placeholder">
-                <div class="loader-icon"></div>
-                <div class="placeholder-text" style="font-size: 0.7rem;">[ шина низкого давления ]</div>
-                <div class="caption">Протектор с самоочищающимися канавками, повышенная пятнистость контакта</div>
+    <!-- СЛАЙДЕР с настоящими фото /img/1.png до /img/11.png -->
+    <div class="container" style="margin-top: 1rem; margin-bottom: 1rem;">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="/img/1.png" alt="Арктический автобус концепт"></div>
+                <div class="swiper-slide"><img src="/img/2.png" alt="Дизайн корпуса"></div>
+                <div class="swiper-slide"><img src="/img/3.png" alt="Протектор колеса"></div>
+                <div class="swiper-slide"><img src="/img/4.png" alt="3D визуализация"></div>
+                <div class="swiper-slide"><img src="/img/5.png" alt="Вездеход в Антарктиде"></div>
+                <div class="swiper-slide"><img src="/img/7.png" alt="Интерьер кастомизация"></div>
+                <div class="swiper-slide"><img src="/img/9.png" alt="Ночная полярная оптика"></div>
+                <div class="swiper-slide"><img src="/img/10.png" alt="Команда"></div>
+                <div class="swiper-slide"><img src="/img/11.png" alt="Арктический вездеход"></div>
             </div>
-            <div class="card">
-                <span class="badge">❄️ Технологии протектора</span>
-                <ul style="padding-left: 1.2rem;">
-                    <li>✔️ Глубокие зигзагообразные канавки для отвода снежной каши</li>
-                    <li>✔️ Усиленные грунтозацепы для льда и фирна</li>
-                    <li>✔️ Эластичная резина с сохранением свойств до -60°C</li>
-                    <li>✔️ Снижение давления на грунт <0,2 кг/см² (сохранение тундры)</li>
-                </ul>
-                <p style="margin-top: 0.8rem;"><strong>Вариации протектора:</strong> арктический (лёд/снег), антарктический (глетчерный лёд + камни), болотоходный.</p>
-            </div>
-        </div>
-        <!-- мини-галерея заглушек -->
-        <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 2rem;">
-            <div class="image-placeholder" style="padding: 1rem; min-height: 100px; flex:1;">
-                <div class="loader-icon" style="width: 30px; height: 30px;"></div>
-                <div class="placeholder-text" style="font-size: 0.7rem;">Снег-лёд</div>
-            </div>
-            <div class="image-placeholder" style="padding: 1rem; min-height: 100px; flex:1;">
-                <div class="loader-icon" style="width: 30px; height: 30px;"></div>
-                <div class="placeholder-text" style="font-size: 0.7rem;">Скальные россыпи</div>
-            </div>
-            <div class="image-placeholder" style="padding: 1rem; min-height: 100px; flex:1;">
-                <div class="loader-icon" style="width: 30px; height: 30px;"></div>
-                <div class="placeholder-text" style="font-size: 0.7rem;">Тундра/распутица</div>
-            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
         </div>
     </div>
-</section>
 
-<!-- Кастомизация под заказчика -->
-<section style="background: #061016;">
-    <div class="container">
-        <h2>⚙️ Кастомизация под специфику заказчика</h2>
-        <p style="margin-bottom: 1rem; color: #BCD3E0;">Проект предлагает гибкую адаптацию для научных и коммерческих экспедиций. Модульная концепция.</p>
-        <div class="flex-compare">
-            <div class="custom-option">
-                <span class="badge" style="background:#FFB347; color:#0A1C24;">🔬 Научный модуль</span>
-                <p>Лабораторное оборудование, рабочие станции, отсек для проб грунта, система спутниковой связи.</p>
-            </div>
-            <div class="custom-option">
-                <span class="badge" style="background:#FFB347; color:#0A1C24;">🏭 Корпоративный</span>
-                <p>Вахтовые перевозки до 12 человек, комфортные кресла с подогревом, багажные контейнеры.</p>
-            </div>
-            <div class="custom-option">
-                <span class="badge" style="background:#FFB347; color:#0A1C24;">🚨 МЧС / Спасательный</span>
-                <p>Медицинский отсек, тепловая пушка, дополнительный запас топлива, лебедка.</p>
+    <!-- Команда -->
+    <section>
+        <div class="container">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;">
+                <div>
+                    <h2>Над проектом работали</h2>
+                    <p><strong>Чечерин Михаил Андреевич</strong> — занимался написанием инженерной книги и координацией
+                        в выборе основных компонентов.</p>
+                    <p><strong>Чкалин Матвей Евгеньевич</strong> — занимался финансовым планом, конспектированием
+                        информацией с экскурсии, занимался подготовкой чертежей.</p>
+                    <p><strong>Наставник:</strong> Волков Сергей Михайлович</p>
+                </div>
+                <div class="card" style="background:#0F1C24;">
+                    <span class="badge">⚡ КВАНТОВЫЙ СКАЧОК</span>
+                    <p>г. Нижний Новгород</p>
+                    <p style="margin-top: 0.5rem;">Концепт-проект Кванториум Нижний Новгород</p>
+                </div>
             </div>
         </div>
-        <div class="highlight-block" style="border-color:#FFB34730;">
-            <p>🎯 <strong>Главное преимущество:</strong> мы не навязываем готовое решение — заказчик участвует в проектировании: от компоновки салона до дизайна внешней графики и выбора типа протектора.</p>
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- Преимущества и проходимость (автомобильные цифры) -->
-<section>
-    <div class="container">
-        <h2>🌿 Экологичность + динамика</h2>
-        <div class="grid-2">
-            <div class="card">
-                <span class="badge">♻️ Минимальный след</span>
-                <p>Шины сверхнизкого давления + большая площадь контакта снижают нагрузку на вечную мерзлоту. Техника не разрушает мохово-лишайниковый покров тундры.</p>
-                <div class="loader-icon" style="width: 36px; height: 36px; margin: 1rem auto 0;"></div>
-                <div class="placeholder-text" style="font-size: 0.7rem;">[ Диаграмма давления на грунт ]</div>
+    <!-- Кейс проекта и ТЗ -->
+    <section>
+        <div class="container">
+            <h2>📋 Кейс проекта / Техническое задание</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <span class="badge">🎯 ТЗ</span>
+                    <ul style="padding-left: 1.2rem;">
+                        <li>Необходимо прорисовать дизайн автобуса для арктической/антарктической местности</li>
+                        <li>Силовая установка с учетом существующих и перспективных разработок</li>
+                        <li>Колесный движитель для крайнего Севера/Юга</li>
+                        <li>Материалы для сверхнизких и сверхвысоких температур</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <span class="badge">🚩 Цель и задачи</span>
+                    <p><strong>Цель:</strong> Разработать концепт автобуса предназначенного для арктической и
+                        антарктической местности, готовый к презентации на конкурсе проектных задач ГАЗ.</p>
+                    <p><strong>Задачи:</strong> Исследование рынка, выбор оптимальной концепции, документация,
+                        презентация.</p>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 1rem;">
+                <span class="badge">💡 Концепция проекта</span>
+                <p>Наш проект посвящен созданию специализированного транспортного средства высокой проходимости —
+                    вездехода, предназначенного для эксплуатации в экстремальных условиях Арктики и Антарктики. Главная
+                    концепция заключается в разработке машины, которая сочетает в себе высокую грузоподъемность,
+                    абсолютную надежность и минимальное воздействие на хрупкую экосистему полярных регионов.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Технические характеристики -->
+    <section style="background: #07121A;">
+        <div class="container">
+            <h2>🔧 Технические характеристики вездехода</h2>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-number">400 л.с.</div>
+                    <div>КамАЗ 740.37-400 V8 турбо</div>
+                    <div>1766 Н·м</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8x8</div>
+                    <div>Портальные мосты «Звезда»</div>
+                    <div>портальность 114 мм</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1780 мм</div>
+                    <div>Шины 1780x710-32</div>
+                    <div>сверхнизкое давление</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">≤0.3 кг/см²</div>
+                    <div>Давление на грунт</div>
+                    <div>экологичность</div>
+                </div>
             </div>
             <div class="card">
-                <span class="badge">📊 Технические характеристики (прототип)</span>
-                <ul>
-                    <li>🔹 Длина: ~7.5 м | Ширина: 2.5 м</li>
-                    <li>🔹 Дорожный просвет: 550 мм</li>
-                    <li>🔹 Преодолеваемый снежный покров: до 1.2 м</li>
-                    <li>🔹 Угол подъёма: 35°</li>
-                    <li>🔹 Мощность силовой установки (перспективный гибрид)</li>
-                </ul>
+                <p><strong>Двигатель:</strong> КамАЗ 740.37-400 — дизельный V8 с турбонаддувом, мощность 400 л.с.,
+                    крутящий момент 1766 Н·м.<br>
+                    <strong>Мосты:</strong> Портальные мосты типа «Звезда», 4 штуки. Портальность 114 мм — ось колеса
+                    опущена, поднимает раму выше. Диаметр ведомого вала редуктора 50 мм.<br>
+                    <strong>Шины и колёса:</strong> Шины 1780x710-32, наружный диаметр 1780 мм, тип: сверхнизкого
+                    давления, «гибкая оболочка».
+                </p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Этапы разработки прототипа -->
-<section style="background: #0A1720;">
-    <div class="container">
-        <h2>🧪 От идеи к прототипу</h2>
-        <div class="grid-3">
-            <div class="card"><span class="badge">1️⃣ Этап</span><strong>Дизайн-исследование</strong><br>Анализ потребностей полярников, эргономика, скетчи экстерьера и протектора.</div>
-            <div class="card"><span class="badge">2️⃣ Этап</span><strong>3D-моделирование</strong><br>Разработка цифровой модели корпуса и колесного движителя с учетом CFD-оптимизации.</div>
-            <div class="card"><span class="badge">3️⃣ Этап</span><strong>Макетирование</strong><br>Создание масштабированного прототипа для тестов в аэродинамической трубе и климатической камере.</div>
-        </div>
-        <div style="text-align: center; margin-top: 2rem;">
-            <div class="btn-outline" style="pointer-events: none;">⚡ РАЗРАБОТКА ВЕДЕТСЯ | КВАНТОРИУМ НИЖНИЙ НОВГОРОД</div>
-        </div>
-    </div>
-</section>
-
-<!-- Финальный акцент без блоков "Готовы к сотрудничеству" и без удаленного футер-текста -->
-<section>
-    <div class="container">
-        <div style="background: linear-gradient(145deg, #0B1922, #041016); border-radius: 2rem; padding: 2rem; text-align: center; border: 1px solid #00A8E8;">
-            <h3 style="color: #ffffff; margin-bottom: 0.8rem;">❄️ Дизайн корпуса + уникальный протектор</h3>
-            <p style="color: #AAC9D9;">Новая эра полярного транспорта. Проект открыт для интеграции перспективных материалов и энергоустановок (гибрид / электрическая тяга).</p>
-            <div style="margin-top: 1rem;">
-                <span class="hero-tag" style="background:#00A8E820;">#АрктическийАвтобус</span>
-                <span class="hero-tag" style="background:#00A8E820;">#КванториумНН</span>
+    <!-- Сравнение с аналогами -->
+    <section>
+        <div class="container">
+            <h2>📊 Сравнение с другими проектами</h2>
+            <div class="compare-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Модель</th>
+                            <th>Двигатель</th>
+                            <th>Колёсная формула</th>
+                            <th>Грузоподъёмность</th>
+                            <th>Цена</th>
+                            <th>Особенности</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>КАМАЗ «Арктика»</td>
+                            <td>240–300 л.с.</td>
+                            <td>6х6</td>
+                            <td>до 3000 кг</td>
+                            <td>от 25 млн руб.</td>
+                            <td>минусы: высокая стоимость, меньшая мощность</td>
+                        </tr>
+                        <tr>
+                            <td>Вездеход «Шаман»</td>
+                            <td>160–200 л.с.</td>
+                            <td>8х8</td>
+                            <td>до 4000 кг</td>
+                            <td>25–33 млн руб.</td>
+                            <td>недостаточная мощность для тяжёлых условий Арктики</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>Наш проект «Автобус для Арктики»</strong></td>
+                            <td><strong>400 л.с.</strong></td>
+                            <td><strong>8х8</strong></td>
+                            <td><strong>до 3000 кг</strong></td>
+                            <td class="price-big">16,5 млн ₽</td>
+                            <td>портальность + шины 1780 мм, давление <0.3, отечественные компоненты</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card">
+                <p>✅ Наш вездеход выигрывает по мощности, цене и экологичности — полностью отечественные компоненты.</p>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer>
-    <div class="container">
-        <p>❄️ Концепт-проект КВАНТОРИУМ НИЖНИЙ НОВГОРОД — разработка прототипа арктического вездехода.<br>Дизайн корпуса и протектора, кастомизация под научные и корпоративные задачи.</p>
-        <p style="margin-top: 0.6rem;">🚀 Адаптивная мобильная версия | Автомобильный стиль | Arctic Vehicle Concept</p>
-    </div>
-</footer>
+    <!-- Области применения -->
+    <section>
+        <div class="container">
+            <h2>🌍 Области применения вездехода</h2>
+            <div class="grid-2">
+                <div class="card"><span class="badge">🔬 Научные экспедиции</span>
+                    <p>Доставка учёных и оборудования, базирование полевых лагерей, геологические и гляциологические
+                        исследования.</p>
+                </div>
+                <div class="card"><span class="badge">🚨 МЧС и спасательные службы</span>
+                    <p>Эвакуация людей из зон бедствий, доставка спасателей и гуманитарных грузов, работа там, где не
+                        пройдёт другая техника.</p>
+                </div>
+                <div class="card"><span class="badge">🛢️ Нефтегазовый сектор</span>
+                    <p>Вахтовые перевозки на месторождения, геологоразведка, работа в период распутицы и зимников.</p>
+                </div>
+                <div class="card"><span class="badge">📦 Промышленная логистика</span>
+                    <p>Северный завоз, доставка грузов в отдалённые посёлки, обеспечение топливом и продовольствием,
+                        экономичная замена авиации.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- ========== ИНТЕГРИРОВАННЫЙ БЛОК: ДИЗАЙН КОРПУСА С НАСТОЯЩИМИ ФОТО ========== -->
+    <section style="background: #07121A;">
+        <div class="container">
+            <h2>🚐 Дизайн корпуса</h2>
+            <div class="grid-2">
+                <div class="img-wrapper">
+                    <img class="real-image" src="/img/6.png" alt="Дизайн корпуса арктического автобуса">
+                    <div class="caption">Обтекаемые формы, ледяная эстетика, усиленная термозащита</div>
+                </div>
+                <div class="card">
+                    <span class="badge">🧊 Особенности экстерьера</span>
+                    <ul style="padding-left: 1.2rem;">
+                        <li>➜ Многослойный композит с утеплителем для экстремальных температур</li>
+                        <li>➜ LED-адаптивная оптика с обогревом (полярная ночь)</li>
+                        <li>➜ Аэродинамические обводы для снижения налипания снега</li>
+                        <li>➜ Выход на крышу, люки для эвакуации и научных наблюдений</li>
+                        <li>➜ Цветовая гамма: белый / оранжевый / камуфляж "арктический"</li>
+                    </ul>
+                    <p style="margin-top: 0.8rem;">🎨 <strong>Кастомизация:</strong> нанесение логотипов заказчика,
+                        экспедиционная маркировка, дополнительный багажный отсек.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ДИЗАЙН ПРОТЕКТОРА КОЛЕСА С НАСТОЯЩИМИ ФОТО ========== -->
+    <section>
+        <div class="container">
+            <h2>🛞 Дизайн протектора колеса</h2>
+            <div class="grid-2">
+                <div class="img-wrapper">
+                    <img class="real-image" src="/img/8.png" alt="Протектор колеса шины низкого давления">
+                    <div class="caption">Протектор с самоочищающимися канавками, повышенная пятнистость контакта</div>
+                </div>
+                <div class="card">
+                    <span class="badge">❄️ Технологии протектора</span>
+                    <ul style="padding-left: 1.2rem;">
+                        <li>✔️ Глубокие зигзагообразные канавки для отвода снежной каши</li>
+                        <li>✔️ Усиленные грунтозацепы для льда и фирна</li>
+                        <li>✔️ Эластичная резина с сохранением свойств до -60°C</li>
+                        <li>✔️ Снижение давления на грунт <0,2 кг/см² (сохранение тундры)</li>
+                    </ul>
+                    <p style="margin-top: 0.8rem;"><strong>Вариации протектора:</strong> арктический (лёд/снег),
+                        антарктический (глетчерный лёд + камни), болотоходный.</p>
+                </div>
+            </div>
+            <!-- мини-галерея с реальными фото для вариаций протектора (используем /img/5.png, /img/6.png, /img/7.png) -->
+            
+        </div>
+    </section>
+
+    <!-- Инновации и бизнес-план -->
+    <section style="background: #061016;">
+        <div class="container">
+            <h2>💎 Инновации проекта / Бизнес-план</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <span class="badge">🚀 Что мы предлагаем?</span>
+                    <p>Вездеход, который сможет работать там, где обычная техника встанет.</p>
+                    <ul style="margin-top: 1rem;">
+                        <li><strong>Простой в обслуживании</strong> — дешево и чинится в поле.</li>
+                        <li><strong>Экологичность</strong> — огромные шины и портальные мосты, масса 12 тонн, почти не
+                            оставляет следов.</li>
+                        <li><strong>Доступная цена</strong> — 16,5 млн рублей (в 2–3 раза дешевле импортных аналогов).
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <span class="badge">💰 Финансовый план</span>
+                    <p>Для постройки первого опытного образца необходимо 19 миллионов рублей. При поддержке ГАЗ сборка
+                        на настоящем производстве.</p>
+                    <p>Целевая цена серийной машины: <strong class="price-big">16,5 млн ₽</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Этапы разработки -->
+    <section>
+        <div class="container">
+            <h2>⛏️ Этапы разработки</h2>
+            <div class="timeline">
+                <div class="timeline-step">
+                    <div class="stat-number" style="font-size:1.8rem;">01</div><strong>Исследование</strong><br>Анализ
+                    аналогов, выбор и модернизация вариантов нейросети.
+                </div>
+                <div class="timeline-step">
+                    <div class="stat-number" style="font-size:1.8rem;">02</div><strong>Инженерия</strong><br>Выбор
+                    силовой установки, колесного движителя и КПП.
+                </div>
+                <div class="timeline-step">
+                    <div class="stat-number" style="font-size:1.8rem;">03</div><strong>Концепция</strong><br>Эскизы,
+                    выбор материалов, 3D-визуализация.
+                </div>
+            </div>
+            <div class="card" style="margin-top: 1rem;">
+                <span class="badge">📌 Исследовательская часть</span>
+                <p>Результатом нашей работы стал концепт автобуса для арктического и антарктического региона, который
+                    отвечает техническим требованиям и соответствует тенденциям современного дизайна. Если наш концепт
+                    будет пущен в производство, это станет прорывом в развитии транспорта в регионе.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Перспективы реализации -->
+    <section style="background: #0A1720;">
+        <div class="container">
+            <h2>🌟 Перспективы реализации и план развития</h2>
+            <div class="timeline">
+                <div class="timeline-step"><strong>Этап 1.</strong> Сотрудничество с ГАЗ. Готовую инженерную разработку
+                    вездехода для Арктики, сделанную нижегородскими школьниками.</div>
+                <div class="timeline-step"><strong>Этап 2.</strong> Привлечение инвестиций (19 млн руб.) на закупку
+                    двигателя, мостов, шин, изготовление рамы.</div>
+                <div class="timeline-step"><strong>Этап 3.</strong> Испытания и демонстрация — реальная арктическая или
+                    антарктическая экспедиция.</div>
+                <div class="timeline-step"><strong>Этап 4.</strong> Серийное производство. Такие машины нужны
+                    полярникам, спасателям, геологам.</div>
+            </div>
+            <div class="card" style="margin-top: 1.5rem; text-align: center;">
+                <p style="font-style: italic; font-weight: 600;">«Наша главная мечта: увидеть, как машина с логотипом
+                    ГАЗ, придуманная нами в школьном кружке, едет по льдам Антарктиды. Это реально, и мы знаем, как это
+                    сделать.»</p>
+                <p>— Команда «Квантовый скачок»</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Финальный блок -->
+    <section>
+        <div class="container">
+            <div
+                style="background: linear-gradient(145deg, #0B1922, #041016); border-radius: 2rem; padding: 2rem; text-align: center;">
+                <h3 style="color: white;">Квантовый скачок — будущее полярного транспорта</h3>
+                <p>Наш проект — это не просто школьные чертежи. Это реальный шанс сделать российскую технику для Арктики
+                    доступной, надёжной и своей.</p>
+                <div style="margin: 1.5rem 0;">
+                    <span class="hero-tag">🏁 Нижний Новгород</span>
+                    <span class="hero-tag">🚀 Готовность к серии</span>
+                </div>
+                <div class="btn-outline-light" style="pointer-events: none;">Спасибо за внимание !</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>❄️ Проект арктического и антарктического автобуса «Квантовый скачок»<br>Команда: Чечерин М.А., Чкалин
+                М.Е. | Наставник Волков С.М. | Кванториум Нижний Новгород</p>
+            
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.mySwiper', {
+            loop: true,
+            autoplay: { delay: 3500, disableOnInteraction: false },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            spaceBetween: 20,
+            slidesPerView: 1,
+        });
+    </script>
 </body>
+
 </html>
